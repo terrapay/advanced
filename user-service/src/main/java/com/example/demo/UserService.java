@@ -34,4 +34,10 @@ public class UserService {
 	public Optional<Users> getUser(int id) {
 		return userRepository.findById(id);
 	}
+	public Optional<Users> getUserByName(String name) {
+		
+		Optional<Users> user = userRepository.getByName(name);
+		System.out.println(user);
+		return user;
+	}
 }

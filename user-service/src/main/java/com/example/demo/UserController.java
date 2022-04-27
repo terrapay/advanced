@@ -34,6 +34,16 @@ public class UserController {
 	@GetMapping("/{id}")
 	ResponseEntity<Users> getUser(@PathVariable int id) {
 		Optional<Users> user = userService.getUser(id);
+		return generateResponse(user);
+	}
+
+	private ResponseEntity<Users> generateResponse(Optional<Users> user) {
 		return user.isPresent() ? new ResponseEntity(user, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
+	@GetMapping("/name/{name}")
+	ResponseEntity<Users> getUserByName(@PathVariable String name) {
+		Optional<Users> user = userService.getUserByName(name);
+		return generateResponse(user);
 	}
 }
