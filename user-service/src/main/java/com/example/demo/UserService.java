@@ -1,6 +1,8 @@
 package com.example.demo;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
@@ -25,5 +27,11 @@ public class UserService {
 		if(user.getName().equals("")) {
 			throw new IOException();
 		}
+	}
+	public List<Users> getUsers() {
+		return userRepository.findAll();
+	}
+	public Optional<Users> getUser(int id) {
+		return userRepository.findById(id);
 	}
 }
