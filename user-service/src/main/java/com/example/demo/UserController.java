@@ -34,14 +34,6 @@ public class UserController {
 	@GetMapping("/{id}")
 	ResponseEntity<Users> getUser(@PathVariable int id) {
 		Optional<Users> user = userService.getUser(id);
-		ResponseEntity<Users> response =null;
-		if(user.isPresent()) {
-			response = new ResponseEntity(user, HttpStatus.OK);
-			return response;
-		}
-		else {
-			response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-			return response;
-		}
+		return user.isPresent() ? new ResponseEntity(user, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 }
