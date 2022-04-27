@@ -1,5 +1,10 @@
 package com.example.demo;
 
+import java.io.IOException;
+
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,13 +13,17 @@ public class UserService {
 
 	@Autowired
 	UserRepository userRepository;
-	
-	public User saveUser(User user) {
+	@Transactional(rollbackOn = {Exception.class}, dontRollbackOn = {IllegalArgumentException.class, IOException.class})
+	public Users saveUser(Users user) throws Exception {
 		System.out.println(user);
-		if(user.getName().equals("")) {
-			throw new IllegalArgumentException();
-		}
 		userRepository.save(user);
+		validateName(user);
 		return user;
+	}
+	@Transactional(value = TxType.REQUIRES_NEW)
+	private void validateName(Users user) throws Exception {
+		if(user.getName().equals("")) {
+			throw new IOException();
+		}
 	}
 }

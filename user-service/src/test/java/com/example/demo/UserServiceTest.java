@@ -19,18 +19,17 @@ class UserServiceTest {
 	
 	@Test
 	void testSaveUser() {
-		User user = new User();
+		Users user = new Users();
 		user.setId(1);
 		user.setName("Pariwesh");
 		when(repository.save(user)).thenReturn(user);
-		User result = service.saveUser(user);
+		Users result = service.saveUser(user);
 		assertEquals(1, result.getId());
-		
 	}
 	
 	@Test
 	void testSaveUserWithBlankName() {
-		User user = new User();
+		Users user = new Users();
 		user.setId(1);
 		user.setName("");
 		assertThrowsExactly(IllegalArgumentException.class,

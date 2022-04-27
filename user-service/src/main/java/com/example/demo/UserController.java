@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
 	@Autowired
-	UserService userService;//mocked during testing
-	
+	UserService userService;// mocked during testing
+
 	@PostMapping
-	public Integer createUser(@RequestBody User user) {
+	public Integer createUser(@RequestBody Users user) throws Exception {
 		userService.saveUser(user);
 		System.out.println(user.getName());
 		return user.getId();
 	}
+
 }

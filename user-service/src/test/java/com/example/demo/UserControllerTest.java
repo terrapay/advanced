@@ -18,7 +18,7 @@ class UserControllerTest {
 
 	@Test
 	void testCreateUser() {
-		User user = new User();
+		Users user = new Users();
 		user.setId(1);
 		when(service.saveUser(user)).thenReturn(user);
 		Integer result = controller.createUser(user);
