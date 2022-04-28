@@ -16,16 +16,16 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 	@Transactional(rollbackOn = {Exception.class}, dontRollbackOn = {IllegalArgumentException.class, IOException.class})
-	public Users saveUser(Users user) throws Exception {
+	public Users saveUser(Users user) {
 		System.out.println(user);
 		userRepository.save(user);
 		validateName(user);
 		return user;
 	}
 	@Transactional(value = TxType.REQUIRES_NEW)
-	private void validateName(Users user) throws Exception {
+	private void validateName(Users user) {
 		if(user.getName().equals("")) {
-			throw new IOException();
+			throw new IllegalArgumentException();
 		}
 	}
 	public List<Users> getUsers() {
