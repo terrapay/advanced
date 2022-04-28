@@ -17,7 +17,7 @@ public class UserService {
 	UserRepository userRepository;
 	@Transactional(rollbackOn = {Exception.class}, dontRollbackOn = {IllegalArgumentException.class, IOException.class})
 	public Users saveUser(Users user) {
-		System.out.println(user);
+		System.out.println(user.getAddresses());
 		userRepository.save(user);
 		validateName(user);
 		return user;

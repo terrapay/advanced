@@ -1,11 +1,13 @@
 package com.example.demo;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 import com.example.demo.entity.Address;
 
@@ -17,9 +19,8 @@ public class Users {
 	private String name;
 	private int age;
 	private String status;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="address_id", referencedColumnName = "id")
-	private Address address;
+	@OneToMany(cascade = CascadeType.ALL )
+	private List<Address> addresses;
 
 	public String getName() {
 		return name;
@@ -56,11 +57,11 @@ public class Users {
 		this.status = status;
 	}
 
-	public Address getAddress() {
-		return address;
+	public List<Address> getAddresses() {
+		return addresses;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
 }

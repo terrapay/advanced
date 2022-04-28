@@ -4,9 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.example.demo.Users;
+
 @Entity
 public class Address {
 	@Id
@@ -14,18 +17,28 @@ public class Address {
 	private Integer id;
 	private String street;
 	private int pin;
-	@OneToOne(mappedBy = "address")
-	private Users user;
+
 	public String getStreet() {
 		return street;
 	}
+
 	public void setStreet(String street) {
 		this.street = street;
 	}
+
 	public int getPin() {
 		return pin;
 	}
+
 	public void setPin(int pin) {
 		this.pin = pin;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }
