@@ -11,7 +11,7 @@ public class Users {
 	Integer id;
 	String name;
 	int age;
-
+	String status;
 	public String getName() {
 		return name;
 	}
