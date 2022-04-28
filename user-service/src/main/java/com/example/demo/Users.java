@@ -1,15 +1,16 @@
 package com.example.demo;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import com.example.demo.entity.Address;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Users {
@@ -17,9 +18,11 @@ public class Users {
 	@GeneratedValue
 	private Integer id;
 	private String name;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
+	private Date dateOfJoining;
 	private int age;
 	private String status;
-	@OneToMany(cascade = CascadeType.ALL )
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Address> addresses;
 
 	public String getName() {
@@ -63,5 +66,13 @@ public class Users {
 
 	public void setAddresses(List<Address> addresses) {
 		this.addresses = addresses;
+	}
+
+	public Date getDateOfJoining() {
+		return dateOfJoining;
+	}
+
+	public void setDateOfJoining(Date dateOfJoining) {
+		this.dateOfJoining = dateOfJoining;
 	}
 }
