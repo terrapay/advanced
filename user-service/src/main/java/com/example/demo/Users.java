@@ -8,6 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 import com.example.demo.entity.Address;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -17,9 +21,12 @@ public class Users {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	@NotBlank
 	private String name;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
+	@Temporal(TemporalType.DATE)
 	private Date dateOfJoining;
+	@Min(value = 1, message = "age cannot be less than 1 year")
 	private int age;
 	private String status;
 	@OneToMany(cascade = CascadeType.ALL)
