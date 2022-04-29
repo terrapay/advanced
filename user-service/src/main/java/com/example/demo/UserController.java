@@ -8,16 +8,19 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -52,6 +55,17 @@ public class UserController {
 	ResponseEntity<Users> getUserByName(@PathVariable String name) {
 		Optional<Users> user = userService.getUserByName(name);
 		return generateResponse(user);
+	}
+
+	@DeleteMapping("/{id}")
+	public void deleteUser(@PathVariable int id) {
+		userService.deleteUser(id);
+	}
+
+	@ExceptionHandler(EmptyResultDataAccessException.class)
+	@ResponseStatus(code = HttpStatus.NOT_FOUND)
+	void handleNonExistentUser() {
+
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)

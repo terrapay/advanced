@@ -28,6 +28,7 @@ public class UserService {
 			throw new IllegalArgumentException();
 		}
 	}
+	
 	public List<Users> getUsers() {
 		return userRepository.findAll();
 	}
@@ -39,5 +40,8 @@ public class UserService {
 		Optional<Users> user = userRepository.getByName(name);
 		System.out.println(user);
 		return user;
+	}
+	public void deleteUser(int id) {
+		userRepository.deleteById(id);
 	}
 }
