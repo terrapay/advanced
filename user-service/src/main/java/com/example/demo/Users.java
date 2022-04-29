@@ -3,33 +3,26 @@ package com.example.demo;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.example.demo.entity.Address;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity
+@Document
 public class Users {
 	@Id
-	@GeneratedValue
-	private Integer id;
+	private String id;
 	@NotBlank
 	private String name;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
-	@Temporal(TemporalType.DATE)
 	private Date dateOfJoining;
 	@Min(value = 1, message = "age cannot be less than 1 year")
 	private int age;
 	private String status;
-	@OneToMany(cascade = CascadeType.ALL)
 	private List<Address> addresses;
 
 	public String getName() {
@@ -49,14 +42,6 @@ public class Users {
 			throw new IllegalArgumentException("age cannot be negative");
 		}
 		this.age = age;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getStatus() {
@@ -81,5 +66,13 @@ public class Users {
 
 	public void setDateOfJoining(Date dateOfJoining) {
 		this.dateOfJoining = dateOfJoining;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }

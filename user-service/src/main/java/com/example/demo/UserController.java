@@ -30,7 +30,7 @@ public class UserController {
 	UserService userService;// mocked during testing
 
 	@PostMapping
-	public Integer createUser(@Valid @RequestBody Users user) throws Exception {
+	public String createUser(@Valid @RequestBody Users user) throws Exception {
 		userService.saveUser(user);
 		System.out.println(user.getName());
 		return user.getId();
@@ -40,27 +40,27 @@ public class UserController {
 	List<Users> getUsers() {
 		return userService.getUsers();
 	}
-
-	@GetMapping("/{id}")
-	ResponseEntity<Users> getUser(@PathVariable int id) {
-		Optional<Users> user = userService.getUser(id);
-		return generateResponse(user);
-	}
+//
+//	@GetMapping("/{id}")
+//	ResponseEntity<Users> getUser(@PathVariable int id) {
+//		Optional<Users> user = userService.getUser(id);
+//		return generateResponse(user);
+//	}
 
 	private ResponseEntity<Users> generateResponse(Optional<Users> user) {
 		return user.isPresent() ? new ResponseEntity(user, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
-	@GetMapping("/name/{name}")
-	ResponseEntity<Users> getUserByName(@PathVariable String name) {
-		Optional<Users> user = userService.getUserByName(name);
-		return generateResponse(user);
-	}
-
-	@DeleteMapping("/{id}")
-	public void deleteUser(@PathVariable int id) {
-		userService.deleteUser(id);
-	}
+//	@GetMapping("/name/{name}")
+//	ResponseEntity<Users> getUserByName(@PathVariable String name) {
+//		Optional<Users> user = userService.getUserByName(name);
+//		return generateResponse(user);
+//	}
+//
+//	@DeleteMapping("/{id}")
+//	public void deleteUser(@PathVariable int id) {
+//		userService.deleteUser(id);
+//	}
 
 	@ExceptionHandler(EmptyResultDataAccessException.class)
 	@ResponseStatus(code = HttpStatus.NOT_FOUND)
