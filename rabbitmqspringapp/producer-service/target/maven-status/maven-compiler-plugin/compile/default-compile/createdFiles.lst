@@ -1,0 +1,4 @@
+com\springframwork\guru\ProducerServiceApplication.class
+com\springframwork\guru\controller\ProducerController.class
+com\springframwork\guru\domain\User.class
+com\springframwork\guru\service\RabbitMqSender.class

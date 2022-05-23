@@ -1,0 +1,4 @@
+com\springframwork\guru\ConsumerServiceApplication.class
+com\springframwork\guru\config\RabbitMQConfig.class
+com\springframwork\guru\domain\User.class
+com\springframwork\guru\service\RabbitMqReceiver.class
