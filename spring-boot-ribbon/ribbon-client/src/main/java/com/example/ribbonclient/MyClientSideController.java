@@ -21,7 +21,7 @@ public class MyClientSideController {
 
 	@RequestMapping("/client/frontend/{id}")
 	public String hi(@PathVariable String id) {
-		String randomString = this.restTemplate.getForObject("http://server/backend", String.class);
+		String randomString = this.restTemplate.getForObject("http://SERVER/backend", String.class);
 		return "Server Response :: " + randomString;
 	}
 }
